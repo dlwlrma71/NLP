@@ -6,14 +6,16 @@ import sys
 import docx2txt
 import pandas as pd
 sys.path.append('..')
-
+ #* 엑셀로부터 데이터 받아오고, 데이터를 하나로 합친다. 
 data = pd.read_excel('아이유.xlsx', sheet_name=1)
 data = data['Lyric_Sentence']
+data = data + ' '
 print(data[0:5])
 text = data.sum()
 
-
+#* 전처리 과정 : ex. 
 corpus, word_to_id, id_to_word = preprocess(text)
+
 word_size = len(word_to_id)
 C = create_co_matrix(corpus, word_size, window_size=2)
 W = ppmi(C, verbose=True)
